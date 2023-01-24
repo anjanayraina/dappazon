@@ -13,11 +13,13 @@ contract Dappazon {
     //stores all the items in the store 
     mapping(uint => Item) public items;
     // stores all the sellers in the store
-    mapping(address=>Seller) sellers;
+    mapping(address=>Seller) public  sellers;
     // all the order history of the clients
-    mapping(uint => Order) orders;
+    mapping(uint => Order) public orders;
+
     enum ProductStatus{outOfStock , inStock , takenDown}
     enum DeliveryStatus{ordered , dispatched , delivered }
+
     modifier isSeller(){
          require(keccak256(abi.encodePacked(sellers[msg.sender].name))!= keccak256(abi.encodePacked("")));
          _;
@@ -32,10 +34,13 @@ contract Dappazon {
         require(items[index].status == ProductStatus.inStock);
         _;
     }
+
     struct Seller{
         string name;
         address wallet;
+        uint balance;
     }
+
     struct Item {
         address owner;
         uint id;
@@ -68,7 +73,7 @@ contract Dappazon {
     }
     // to add a seller to the marketplace
     function addSeller(string calldata _name ) public {
-        sellers[msg.sender] = Seller(_name , msg.sender);
+        sellers[msg.sender] = Seller(_name , msg.sender ,0);
     }
 
     function changeItemAvaliability(uint index, uint change ) external isItemOwner(index){
@@ -83,11 +88,22 @@ contract Dappazon {
  
     }
 
-    function buyItem(uint index) external  canBeBought(index){
+    function buyItem(uint index) payable external  canBeBought(index){
         Item memory item  = items[index];
+        require(msg.value >= item.cost, "Not enough funds given");
         orders[orderIndex.current()] = Order( msg.sender ,item.owner, orderIndex.current() , DeliveryStatus.ordered );
+        sellers[item.owner].balance+=item.cost;
         orderIndex.increment();
 
+    }
+
+    function withdrawFunds() public isSeller {
+       require(sellers[msg.sender].balance > 0 , "Not enough Funds");
+       uint amount = sellers[msg.sender].balance;
+       sellers[msg.sender].balance =0;
+       bool success ;
+       (success, ) = payable(msg.sender).call{value : amount}("");
+       require(success );
     }
 
     function changeDelieryStatus( uint index,uint change) external  isSeller isItemOwner(index){
