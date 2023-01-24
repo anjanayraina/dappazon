@@ -85,10 +85,16 @@ contract Dappazon {
 
     function buyItem(uint index) external  canBeBought(index){
         Item memory item  = items[index];
+        orders[orderIndex.current()] = Order( msg.sender ,item.owner, orderIndex.current() , DeliveryStatus.ordered );
+        orderIndex.increment();
 
     }
 
     function changeDelieryStatus( uint index,uint change) external  isSeller isItemOwner(index){
-        Order memory order  =orders[index]; 
+       if(change == 0 )orders[index].status = DeliveryStatus.ordered;
+       else if(change == 1)orders[index].status = DeliveryStatus.dispatched;
+       else{
+           orders[index].status = DeliveryStatus.delivered;
+       }
     }
 }
