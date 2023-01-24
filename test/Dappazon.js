@@ -6,9 +6,16 @@ const tokens = (n) => {
 }
 
 describe("Dappazon", () => {
-  it('Correct Name!!' , async ()=>{
+// before each is a function that is used to declare the contract and deploy it and then also run all the 
+  beforeEach(async() => {
+
+    console.log(await ethers.getSigners())
+   
     const Dappazon = await ethers.getContractFactory("Dappazon")
     dappazon  = await Dappazon.deploy()
+  })
+  it('Correct Name!!' , async ()=>{
+
     const name = await dappazon.name()
     expect(name).to.equal("Dappazon")
   })
