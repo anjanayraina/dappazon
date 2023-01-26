@@ -1,11 +1,14 @@
 import { ethers } from 'ethers';
 
 
-function onClickHandler(){
 
-}
 const Navigation = ({ account, setAccount }) => {
-
+    const onClickHandler = async ()=>{
+        setAccount("Connecting..")
+        const  accounts = await window.ethereum.request({method : 'eth_requestAccounts'});
+        const account = ethers.utils.getAddress(accounts[0]);
+        setAccount(account);
+    }
     return (
         <nav>
             <div className = "nav__brand">
@@ -16,7 +19,7 @@ const Navigation = ({ account, setAccount }) => {
                account ? 
                     (<button type = "button" className='nav__connect'>{account.slice(0,5) + '...' + account.slice(38,42 )}</button>)
                 : (
-                    <button type = "button" className='nav__connect' onClick= {onClickHandler}>Connect Metamask</button>
+                    <button type = "button" className='nav__connect' onClick= {onClickHandler}>Metamask</button>
                 )
             }
             
