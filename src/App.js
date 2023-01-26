@@ -19,7 +19,7 @@ function App() {
     const account = ethers.utils.getAddress(accounts[0]);
     setAccount(account);
     console.log(account);
-    
+
 
   }
   useEffect(() => {
@@ -28,9 +28,9 @@ function App() {
 
   return (
     <div>
-
+      <Navigation  account = {account} setAccount = {setAccount}/>
       <h2>Welcome to Dappazon</h2>
-      <p>{account}</p>
+      {/* <p>{account}</p> */}
 
     </div>
   );
