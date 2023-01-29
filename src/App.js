@@ -42,6 +42,10 @@ function App() {
       }
       allItems.push(item);
     }
+
+
+    const electronics= allItems.filter((item)=>item.cateogry === "Electronics");
+    console.log(electronics);
     console.log(allItems);
 
   }
