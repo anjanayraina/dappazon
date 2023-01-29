@@ -15,6 +15,7 @@ import config from './config.json'
 function App() {
   const [account , setAccount] = useState(null);
   const [provider , setProvider]= useState(null);
+  const [contractInstance , setContractInstance] = useState(null);
 
   const loadAccount = async () =>{
 
@@ -30,10 +31,20 @@ function App() {
     setProvider(tempProvider);
     const network = await tempProvider.getNetwork();
     console.log(network);
-    const contractInstance = new ethers.Contract("0xe921118103f6C0Db2540eBCfdCF8342e3Fcf8ed4", Dappazon , tempProvider);
+    const contractInstance = new ethers.Contract("0x9421facBD9CaA0fa55bA0564B680C50883696db7", Dappazon , tempProvider);
+    setContractInstance(contractInstance);
+
+    const allItems = [];
+    for(var i=0;i<1;i++){
+      const item = contractInstance.items(i);
+      allItems.push(item);
+    }
+    console.log(allItems);
+    console.log(contractInstance.sellers("0x8A48d85d15d8BcdeF07c2F855CbEcDaDC774d5DE"));
   }
   useEffect(() => {
     loadAccount()
+    loadData()
   } , [])
 
   return (
