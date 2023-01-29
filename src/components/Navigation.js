@@ -28,7 +28,7 @@ const Navigation = ({ account, setAccount }) => {
                 <li><a href = "#Jewelry">Jewelry</a></li>
                 <li><a href = "#Electronics">Electronics</a></li>
                 <li><a href = "#Gaming">Gaming</a></li>
-                <li><a href = "#Gaming">Toys</a></li>
+                <li><a href = "#Toys">Toys</a></li>
             </ul>
         </nav>
     );

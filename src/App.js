@@ -30,7 +30,7 @@ function App() {
     setProvider(tempProvider);
     const network = await tempProvider.getNetwork();
     console.log(network);
-    const contractInstance = new ethers.Contract("", abi)
+    // const contractInstance = new ethers.Contract("", abi)
   }
   useEffect(() => {
     loadAccount()
