@@ -35,12 +35,15 @@ function App() {
     setContractInstance(contractInstance);
 
     const allItems = [];
-    for(var i=0;i<1;i++){
-      const item = contractInstance.items(i);
+    for(var i=0; ;i++){
+      const item =await contractInstance.items(i);
+      if(item.name == ""){
+        break;
+      }
       allItems.push(item);
     }
     console.log(allItems);
-    console.log(contractInstance.sellers("0x8A48d85d15d8BcdeF07c2F855CbEcDaDC774d5DE"));
+
   }
   useEffect(() => {
     loadAccount()
