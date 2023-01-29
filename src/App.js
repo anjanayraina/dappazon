@@ -14,21 +14,31 @@ import config from './config.json'
 
 function App() {
   const [account , setAccount] = useState(null);
-  const loadData = async () =>{
+  const [provider , setProvider]= useState(null);
 
-    console.log(account);
+  const loadAccount = async () =>{
 
+    setAccount("Connecting..")
+    const  accounts = await window.ethereum.request({method : 'eth_requestAccounts'});
+    const account = ethers.utils.getAddress(accounts[0]);
+    setAccount(account);
 
   }
+
+  const loadData = async () =>{
+    const tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+    setProvider(tempProvider);
+    const network = await tempProvider.getNetwork();
+    console.log(network);
+    const contractInstance = new ethers.Contract("", abi)
+  }
   useEffect(() => {
-    loadData()
+    loadAccount()
   } , [])
 
   return (
     <div>
       <Navigation  account = {account} setAccount = {setAccount}/>
-     
-      {/* <p>{account}</p> */}
 
     </div>
   );
