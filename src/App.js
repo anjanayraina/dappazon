@@ -30,7 +30,7 @@ function App() {
     setProvider(tempProvider);
     const network = await tempProvider.getNetwork();
     console.log(network);
-    // const contractInstance = new ethers.Contract("", abi)
+    const contractInstance = new ethers.Contract("0xe921118103f6C0Db2540eBCfdCF8342e3Fcf8ed4", Dappazon , tempProvider);
   }
   useEffect(() => {
     loadAccount()
