@@ -19,8 +19,11 @@ function App() {
   const [electronics , setElectronics] = useState(null);
   const [clothing , setClothing] = useState(null);
   const [toys , setToys] = useState(null);
-  const togglePop = ()=>{
-
+  const [item , setItem] = useState(null);
+  const [toggle , setToggle] = useState(null);
+  const togglePop = (item)=>{
+    setItem(item)
+    toggle ? setToggle(false) : setToggle(true);
   }
   const loadAccount = async () =>{
 
@@ -62,6 +65,7 @@ function App() {
     
   }
   useEffect(() => {
+    console.log(account);
     loadAccount()
     loadData()
   } , [])
@@ -74,6 +78,10 @@ function App() {
         <Section title = {"Clothing"} items = {clothing} togglePop = {togglePop}/>
         <Section title = {"Electronics"} items = {electronics} togglePop = {togglePop}/>
         <Section title = {"Toys"} items = {toys} togglePop = {togglePop}/>
+
+        {toggle && (
+          <Product item = {item} provider = {provider} account = {account} dappazon = {contractInstance} togglePop = {togglePop}/>
+        )}
     </div>
   );
 }
