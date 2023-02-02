@@ -72,7 +72,8 @@ function App() {
       <h2>All Dappazon Products</h2>
 
         <Section title = {"Clothing"} items = {clothing} togglePop = {togglePop}/>
- 
+        <Section title = {"Electronics"} items = {electronics} togglePop = {togglePop}/>
+        <Section title = {"Toys"} items = {toys} togglePop = {togglePop}/>
     </div>
   );
 }

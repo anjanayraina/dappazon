@@ -10,7 +10,17 @@ const Section = ({ title, items, togglePop }) => {
             <hr/>
             <div className ='cards'>
                 {items.map((item ,index) => (
-                    <h4>{item.name}</h4>
+                    <div className = "card"  key = {index} onClick= {() => togglePop(item)}>
+                        
+                        <div className = "card__image" alt = "Item">
+                            <img src ={item.image} alt = "Item Image"/>
+                        </div>
+                        <div className = "card__info">
+                            <h4>{item.name}</h4>
+                            <Rating value = {item.rating} />
+                            <p>{ethers.utils.formatUnits(item.cost.toString() , 'wei')} WEI</p>
+                        </div>
+                    </div>
                 ))}
             </div>
         </div>
