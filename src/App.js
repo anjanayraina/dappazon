@@ -16,7 +16,12 @@ function App() {
   const [account , setAccount] = useState(null);
   const [provider , setProvider]= useState(null);
   const [contractInstance , setContractInstance] = useState(null);
+  const [electronics , setElectronics] = useState(null);
+  const [clothing , setClothing] = useState(null);
+  const [toys , setToys] = useState(null);
+  const togglePop = ()=>{
 
+  }
   const loadAccount = async () =>{
 
     setAccount("Connecting..")
@@ -45,9 +50,16 @@ function App() {
 
 
     const electronics= allItems.filter((item)=>item.cateogry === "Electronics");
+    setElectronics(electronics);
     console.log(electronics);
-    console.log(allItems);
-
+    
+    const clothing= allItems.filter((item)=>item.cateogry === "Clothing");
+    setClothing(clothing);
+    console.log(clothing);
+    const toys = allItems.filter((item)=>item.cateogry === "Toys");
+    setToys(toys);
+    console.log(toys);
+    
   }
   useEffect(() => {
     loadAccount()
@@ -57,7 +69,10 @@ function App() {
   return (
     <div>
       <Navigation  account = {account} setAccount = {setAccount}/>
+      <h2>All Dappazon Products</h2>
 
+        <Section title = {"Clothing"} items = {clothing} togglePop = {togglePop}/>
+ 
     </div>
   );
 }
