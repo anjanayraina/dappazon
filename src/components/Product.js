@@ -6,6 +6,11 @@ import Rating from './Rating'
 
 import close from '../assets/close.svg'
 
+ async function  buyItem(item , contractInstance , account ,provider ){
+  let signer = await provider.getSigner();
+  let transaction  = await contractInstance.connect(signer).buyItem(item.id , {value :item.cost});
+
+}
 const Product = ({ item, provider, account, dappazon, togglePop }) => {
 
   return (
@@ -25,6 +30,7 @@ const Product = ({ item, provider, account, dappazon, togglePop }) => {
          {item.status == 0 && (<h5>Item Sold out</h5>)}
           {item.status == 1 && (<h5>Item In Stock</h5>)}
           <button className = "closeButton" onClick ={() => togglePop(false)}>Close</button>
+          <button className = "buyButton" onClick= {buyItem(item , dappazon , account , provider )}>Buy Item</button>
           </div>
       </div>
     </div >

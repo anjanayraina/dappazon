@@ -40,6 +40,7 @@ function App() {
     setProvider(tempProvider);
     const network = await tempProvider.getNetwork();
     console.log(network);
+
     const contractInstance = new ethers.Contract("0x221545Fec5605110B9F67122E9976237360037D9", Dappazon , tempProvider);
     setContractInstance(contractInstance);
 
