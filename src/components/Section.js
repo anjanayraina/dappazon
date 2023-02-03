@@ -3,15 +3,14 @@ import { ethers } from 'ethers'
 // Components
 import Rating from './Rating'
 
-const Section = ({ title, items, togglePop }) => {
+const Section = ({ title, items, togglePop , loading }) => {
     return (
         <div className='cards__section'>
             <h3 id = {title}>{title}</h3>
             <hr/>
-            <div className ='cards'>
+           <div className ='cards'>
                 {items.map((item ,index) => (
                     <div className = "card"  key = {index} onClick= {() => togglePop(item)}>
-                        
                         <div className = "card__image" alt = "Item">
                             <img src ={item.image} alt = "Item Image"/>
                         </div>

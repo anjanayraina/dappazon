@@ -21,6 +21,7 @@ function App() {
   const [toys , setToys] = useState(null);
   const [item , setItem] = useState(null);
   const [toggle , setToggle] = useState(null);
+  const [isLoading , setLoading] = useState(true);
   const togglePop = (item)=>{
     setItem(item)
     toggle ? setToggle(false) : setToggle(true);
@@ -49,17 +50,18 @@ function App() {
         break;
       }
       allItems.push(item);
+      setLoading(false);
     }
 
 
-    const electronics= allItems.filter((item)=>item.cateogry === "Electronics");
+    const electronics= allItems.filter((item)=>(item.cateogry === "Electronics" && item.status != 2) );
     setElectronics(electronics);
     console.log(electronics);
     
-    const clothing= allItems.filter((item)=>item.cateogry === "Clothing");
+    const clothing= allItems.filter((item)=>(item.cateogry === "Clothing" && item.status != 2));
     setClothing(clothing);
     console.log(clothing);
-    const toys = allItems.filter((item)=>item.cateogry === "Toys");
+    const toys = allItems.filter((item)=>(item.cateogry === "Toys" && item.status != 2));
     setToys(toys);
     console.log(toys);
     
@@ -75,9 +77,9 @@ function App() {
       <Navigation  account = {account} setAccount = {setAccount}/>
       <h2>All Dappazon Products</h2>
 
-        <Section title = {"Clothing"} items = {clothing} togglePop = {togglePop}/>
-        <Section title = {"Electronics"} items = {electronics} togglePop = {togglePop}/>
-        <Section title = {"Toys"} items = {toys} togglePop = {togglePop}/>
+        <Section title = {"Clothing"} items = {clothing} togglePop = {togglePop} loading = {isLoading}/>
+        <Section title = {"Electronics"} items = {electronics} togglePop = {togglePop} loading = {isLoading}/>
+        <Section title = {"Toys"} items = {toys} togglePop = {togglePop} loading = {isLoading}/>
 
         {toggle && (
           <Product item = {item} provider = {provider} account = {account} dappazon = {contractInstance} togglePop = {togglePop}/>

@@ -22,7 +22,7 @@ const Product = ({ item, provider, account, dappazon, togglePop }) => {
           <h2>{ethers.utils.formatUnits(item.cost.toString() , 'wei')} WEI</h2>
           <hr />
           <h2>Overview</h2>
-          {item.status == 0 && (<h5>Item Sold out</h5>)}
+         {item.status == 0 && (<h5>Item Sold out</h5>)}
           {item.status == 1 && (<h5>Item In Stock</h5>)}
           </div>
       </div>
