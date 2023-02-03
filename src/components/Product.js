@@ -24,6 +24,7 @@ const Product = ({ item, provider, account, dappazon, togglePop }) => {
           <h2>Overview</h2>
          {item.status == 0 && (<h5>Item Sold out</h5>)}
           {item.status == 1 && (<h5>Item In Stock</h5>)}
+          <button className = "closeButton" onClick ={() => togglePop(false)}>Close</button>
           </div>
       </div>
     </div >
